@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz App</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+<link rel="manifest" href="./site.webmanifest">
+</head>
+<style>
+    *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+#one{
+    background: linear-gradient(to right, #8f2c13, #feb47b);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+#one h1{
+    font-size: 3rem;
+    color: #fff;
+    margin-top: 2vh;
+    text-shadow: 0 0 2px rgba(0, 0, 0);
+
+}
+.box{
+    width: 90%;
+    height: 80%;
+    display: flex;
+    align-items: center;    
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    position: relative; 
+    overflow: hidden;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+    text-align: center;
+    font-size: 1.5rem;
+    flex-direction: column;
+}
+.box h2{
+    font-size: 1.7rem;
+    color: #333;
+    margin-top: 20px;
+}
+ .box p{
+    font-size: 1.2rem;
+    color: #666;
+    margin-top: 10px;
+ }#question{
+    font-size: 3vh;
+ }
+ .quiz{
+    width: 90%;
+    height: 85%;
+    display: flex;   
+    background: #fff;
+    border-radius: 20px;
+    position: relative; 
+    overflow: hidden;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+    text-align: center;
+    font-size: 1.5rem;
+    flex-direction: column;
+ }
+ .quiz h3{
+    font-size: 1.7rem;
+    color: #333;
+    margin-top: 20px;
+    float: left;
+    text-align: start;
+ }
+ #answer-button{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border-radius: 20px;
+    position: relative; 
+    overflow: hidden;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-align: center;
+    font-size: 1.5rem;
+    flex-direction: row
+ }
+ .btn{
+    background: #8f2c13;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: block;
+    width: max-content;
+    text-align: center;
+    transition: all 0.3s ease;
+margin-left: 10px; 
+}
+ .btn:hover{
+    background: #feb47b;
+    color: #000000;
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 10px; ;
+ }
+ #next-btn{
+    background: #000000;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: block;
+    width: max-content;
+    text-align: center;
+    margin: auto;
+    transition: all 0.3s ease;
+    display: none;
+ }
+    #next-btn:hover{
+        background: #ffffff;
+        color: #000000;
+        transform: scale(1.05);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        border-radius: 10px; ;
+    }
+</style>
+<body>
+    <section id="one" >
+        <h1>Quiz App</h1>
+        <div class="box">
+            <h2>Welcome to the Quiz App!</h2>
+            <p>Test your knowledge with our fun quizzes.</p>
+            <div class="quiz">
+                <h3 id="question">Questions goes here</h3>
+                <div id="answer-buttons">
+                    <button class="btn" id="answer1">Answer 1 lorem</button>
+                    <button class="btn" id="answer2">Answer 2</button>
+                    <button class="btn" id="answer3">Answer 3</button>
+                    <button class="btn" id="answer4">Stephen Hawking</button>
+                </div>
+                <button id="next-btn">Next</button>
+            </div>
+        </div>
+    </section>
+    <script>
+const question = [
+    {
+        question: "Which famous scientist developed the theory of relativity?",
+        options: ["Isaac Newton", "Albert Einstein", "Galileo Galilei", "Stephen Hawking"],
+        answer: 1
+    },
+    {
+        question: "In which year did the Titanic sink in the North Atlantic Ocean?",
+        options: ["1905", "1912", "1923", "1931"],
+        answer: 1
+    },
+    {
+        question: "What is the chemical symbol for gold?",
+        options: ["Au", "Ag", "Fe", "Pb"],
+        answer: 0
+    },
+    {
+        question: "Who wrote 'Romeo and Juliet'?",
+        options: ["Charles Dickens", "William Shakespeare", "Mark Twain", "Jane Austen"],
+        answer: 1
+    },
+    {
+        question: "What is the speed of light (approximately)?",
+        options: ["300,000 km/s", "150,000 km/s", "450,000 km/s", "600,000 km/s"],
+        answer: 0
+    },
+    {
+        question: "Which of the following countries is the largest by land area?",
+        options: ["United States", "Canada", "China", "Russia"],
+        answer: 3
+    },
+    {
+        question: "What is the capital of Japan?",
+        options: ["Tokyo", "Seoul", "Beijing", "Bangkok"],
+        answer: 0
+    },
+    {
+        question: "Who painted the Mona Lisa?",
+        options: ["Vincent van Gogh", "Pablo Picasso", "Leonardo da Vinci", "Claude Monet"],
+        answer: 2
+    },
+    {
+        question: "What is the largest planet in our solar system?",
+        options: ["Earth", "Mars", "Jupiter", "Saturn"],
+        answer: 2
+    },
+    {
+        question: "Which element has the atomic number 1?",
+        options: ["Oxygen", "Hydrogen", "Carbon", "Nitrogen"],
+        answer: 1
+    }
+];
+
+const questionElement = document.getElementById("question");
+const answerButtons = document.getElementById("answer-buttons");
+const nextButton = document.getElementById("next-btn");
+
+let currentQuestionIndex = 0;
+let score = 0;
+
+function startQuiz() {
+    currentQuestionIndex = 0;
+    score = 0;
+    nextButton.innerHTML = "Next";
+    showQuestion();
+}
+
+function showQuestion() {
+    resetState();
+    let currentQuestion = question[currentQuestionIndex];
+    let questionNo = currentQuestionIndex + 1;
+    questionElement.innerHTML = questionNo + ". " + currentQuestion.question;
+
+    currentQuestion.options.forEach((option, index) => {
+        const button = document.createElement("button");
+        button.innerHTML = option;
+        button.classList.add("btn");
+        button.dataset.index = index;
+        button.addEventListener("click", selectAnswer);
+        answerButtons.appendChild(button);
+    });
+}
+
+function resetState() {
+    nextButton.style.display = "none";
+    while (answerButtons.firstChild) {
+        answerButtons.removeChild(answerButtons.firstChild);
+    }
+}
+
+function selectAnswer(e) {
+    const selectedBtn = e.target;
+    const correct = parseInt(selectedBtn.dataset.index) === question[currentQuestionIndex].answer;
+
+    if (correct) {
+        selectedBtn.classList.add("correct");
+        score++;
+    } else {
+        selectedBtn.classList.add("incorrect");
+    }
+
+    Array.from(answerButtons.children).forEach(button => {
+        if (parseInt(button.dataset.index) === question[currentQuestionIndex].answer) {
+            button.classList.add("correct");
+        }
+        button.disabled = true;
+    });
+    nextButton.style.display = "block";
+}
+
+function handleNextButton() {
+    currentQuestionIndex++;
+    if (currentQuestionIndex < question.length) {
+        showQuestion();
+    } else {
+        showScore();
+    }
+}
+
+function showScore() {
+    resetState();
+    questionElement.innerHTML = `You scored ${score} out of ${question.length}!`;
+    nextButton.innerHTML = "Play Again";
+    nextButton.style.display = "block";
+}
+
+nextButton.addEventListener("click", () => {
+    if (currentQuestionIndex < question.length) {
+        handleNextButton();
+    } else {
+        startQuiz();
+    }
+});
+
+startQuiz();
+    </script>
+</body>
+</html>
